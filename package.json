@@ -1,0 +1,23 @@
+{
+  "name": "threejs-journey-lessons",
+  "version": "1.0.0",
+  "description": "All the lessons for threeJS Journey",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheInfamousGrim/threeJS-Journey-Lessons.git"
+  },
+  "author": "Bruno Simon, George Fincher",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TheInfamousGrim/threeJS-Journey-Lessons/issues"
+  },
+  "homepage": "https://github.com/TheInfamousGrim/threeJS-Journey-Lessons#readme",
+  "dependencies": {
+    "eslint-config-wesbos": "^3.2.3"
+  }
+}
