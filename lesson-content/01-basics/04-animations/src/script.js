@@ -29,4 +29,43 @@ const renderer = new THREE.WebGLRenderer({
     canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
-renderer.render(scene, camera);
+
+/* -------------------------------------------------------------------------- */
+/*                                 animations                                 */
+/* -------------------------------------------------------------------------- */
+
+/* ------------------------------- time method ------------------------------ */
+// Get time
+// let time = Date.now();
+
+/* ------------------------------ clock method ------------------------------ */
+const clock = new THREE.Clock();
+
+const tick = () => {
+    // Adapt to the frame rate
+    // const currentTime = Date.now();
+    // Get the difference between the current time and the time from the previous tick.
+    // const deltaTime = currentTime - time;
+    // time = currentTime;
+
+    // Clock method
+    const elapsedTime = clock.getElapsedTime();
+
+    // Update object position
+    // mesh.rotation.y += 0.01;
+    // This is one revolution per second
+    // mesh.rotation.y = elapsedTime * Math.PI * 2;
+    // mesh.position.y = Math.sin(elapsedTime);
+    // mesh.position.x = Math.cos(elapsedTime);
+
+    camera.position.y = Math.sin(elapsedTime);
+    camera.position.x = Math.cos(elapsedTime);
+    camera.lookAt(mesh.position);
+
+    // Render
+    renderer.render(scene, camera);
+    window.requestAnimationFrame(tick);
+};
+
+// Always call the tick function once at the end
+tick();
