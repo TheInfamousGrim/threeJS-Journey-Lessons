@@ -76,3 +76,129 @@ const sizes = {
     height: 600
 }
 ```
+
+### Near and Far
+
+The third and fourth parameters called near and far, correspond to how close and how far the camera can see. Any object or part of the object closer to the camera than the `near` value or further away from the camera than the `far` value will not show up on the render.
+
+You can see that like in those old racing games where you could see the trees pop up in the distance.
+
+While you might be tempted to use very small and very large values like `0.0001` and `9999999` you might end up with a bug called **z-fighting** where two faces seem to fight for which one will be rendered above the other.
+
+Use reasonable values like `0.1` and `100` and only increase as needed.
+
+## OrthographicCamera
+
+The `OrthographicCamera` differs from the `PerspectiveCamera` by its lack of perspective, meaning that the objects will have the same size regardless of their distance from the camera.
+
+The parameters you have to provide are very different from the `PerspectiveCamera`.
+
+Instead of a field of view, you must provide how far the camera can see in each direction (`left`, `right`, `top` and `bottom`). Then you can provide the `near` and `far` values just like we did for the **PerspectiveCamera**.
+
+We need to use the canvas ratio (width by height). Let's create a variable named `aspectRatio` (just like the `PerspectiveCamera`) and store that ratio in it:
+
+```JavaScript
+const aspectRatio = sizes.width / sizes.height
+const camera = new THREE.OrthographicCamera(- 1 * aspectRatio, 1 * aspectRatio, 1, - 1, 0.1, 100)
+```
+
+## Custom Controls
+
+Looking at the `PerspectiveCamera`, what we want to do now is control the camera with our mouse. First of all, we want to know the mouse coordinates. We can do that using native JavaScript by listening to the `mousemove` event with `addEventListener`.
+
+The coordinates will be located in the argument of the callback function as `event.clientX` and `event.clientY`:
+
+```JavaScript
+// Cursor
+const cursor = {
+    x: 0,
+    y: 0
+}
+
+window.addEventListener('mousemove', (event) =>
+{
+    cursor.x = event.clientX / sizes.width - 0.5
+    cursor.y = event.clientY / sizes.height - 0.5
+
+    console.log(cursor.x, cursor.y)
+})
+```
+
+Then we can update the camera with fully circular movements by using a little bit of trigonometry
+
+```JavaScript
+const tick = () =>
+{
+    // ...
+
+    // Update camera
+    camera.position.x = Math.sin(cursor.x * Math.PI * 2) * 2
+    camera.position.z = Math.cos(cursor.x * Math.PI * 2) * 2
+    camera.position.y = cursor.y * 3
+    camera.lookAt(mesh.position)
+
+    // ...
+}
+
+tick()
+```
+
+## Built in Controls
+
+While it can be useful to create your own camera controls, more often than not you can use the built in classes that help you do the same and much more.
+
+You can view all camera controls by looking at the [three.js docs](https://threejs.org/docs/index.html?q=contro#examples/en/controls/OrbitControls) and typing in **control** in the search bar.
+
+## OrbitControls
+
+OrbitControls is probably the go to camera control that you'll be using mostly.
+
+### Instantiating
+
+First, we need to instantiate a variable using the `OrbitControls` class:
+
+```JavaScript
+// Controls
+const controls = new OrbitControls(camera, canvas)
+```
+
+You can now drag and drop using both the left mouse or the right mouse to move the camera, and you can scroll up or down to zoom in or out.
+
+It's much easier than our custom code, and it comes with more controls. But let's go a little further.
+
+### Target
+
+You can update what the orbit focuses on by changing the target properties:
+
+```JavaScript
+controls.target.y = 2
+controls.update()
+```
+
+Not useful in this instance so we're not going to use it.
+
+### Damping
+
+If you read the documentation of **OrbitControls** there are mentions of `damping`. The damping will smooth the animation by adding some kind of acceleration and friction formulas.
+
+To enable damping, switch the `enableDamping` property of `controls` to `true`.
+
+In order to work properly, the controls also needs to be updated on each frame by calling `controls.update()`. You can do that on the `tick` function:
+
+```JavaScript
+// Controls
+const controls = new OrbitControls(camera, canvas)
+controls.enableDamping = true
+
+// ...
+
+const tick = () =>
+{
+    // ...
+
+    // Update controls
+    controls.update()
+
+    // ...
+}
+```
