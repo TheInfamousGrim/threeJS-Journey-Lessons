@@ -27,6 +27,42 @@ const sizes = {
     height: window.innerHeight,
 };
 
+/* ----------------------------- handle resizing ---------------------------- */
+window.addEventListener('resize', (e) => {
+    console.log('Window has been resized');
+
+    // Update the sizes
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
+
+    // Update the camera
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
+
+    // Update the renderer
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+});
+
+/* ---------------------------- handle fullscreen --------------------------- */
+window.addEventListener('dblclick', () => {
+    // Do this for safari!!!
+    const fullscreenElement =
+        document.fullscreenElement || document.webkitFullscreenElement;
+
+    if (!fullscreenElement) {
+        if (canvas.requestFullscreen) {
+            canvas.requestFullscreen();
+        } else if (canvas.webkitRequestFullscreen) {
+            canvas.webkitRequestFullscreen();
+        }
+    } else if (document.exitFullscreen) {
+        document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+    }
+});
+
 /**
  * Camera
  */
@@ -51,6 +87,9 @@ const renderer = new THREE.WebGLRenderer({
     canvas,
 });
 renderer.setSize(sizes.width, sizes.height);
+/* ------------------------------- pixel ratio ------------------------------ */
+// Set the minumum pixel ratio
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
 /**
  * Animate
