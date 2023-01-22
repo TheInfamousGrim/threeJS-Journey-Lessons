@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import 'normalize.css';
 
 /**
  * Base
@@ -22,8 +23,8 @@ scene.add(mesh);
  * Sizes
  */
 const sizes = {
-    width: 800,
-    height: 600,
+    width: window.innerWidth,
+    height: window.innerHeight,
 };
 
 /**
