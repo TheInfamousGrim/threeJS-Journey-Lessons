@@ -11,3 +11,4 @@ All the lessons to learn how to make cool 3D stuff 🕹️
    - [Animations](./lesson-content/01-basics/04-animations/readme.md)
    - [Cameras](./lesson-content/01-basics/05-cameras/readme.md)
    - [Fullscreen and Resizing](./lesson-content/01-basics/06-fullscreen-and-resizing/readme.md)
+   - [Geometries](./lesson-content/01-basics/07-geometries/readme.md)
