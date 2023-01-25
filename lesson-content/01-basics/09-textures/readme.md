@@ -1,10 +1,19 @@
 # Three.js Journey
 
+## Introduction
+
+Most of the lesson content is contained in the [script file](./src/script.js). Use that to understand some of the more complex topics
+
+## Contents
+
+[return to contents](../../../README.md)
+
 ## Setup
+
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
 
-``` bash
+```bash
 # Install dependencies (only the first time)
 npm install
 

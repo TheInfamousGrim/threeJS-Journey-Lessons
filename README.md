@@ -13,3 +13,4 @@ All the lessons to learn how to make cool 3D stuff 🕹️
    - [Fullscreen and Resizing](./lesson-content/01-basics/06-fullscreen-and-resizing/readme.md)
    - [Geometries](./lesson-content/01-basics/07-geometries/readme.md)
    - [Debug UI](./lesson-content/01-basics/08-debug-ui/readme.md)
+   - [Textures](./lesson-content/01-basics/09-textures/readme.md)
