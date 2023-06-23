@@ -26,6 +26,7 @@ const axesHelper = new THREE.AxesHelper();
  */
 const textureLoader = new THREE.TextureLoader();
 const matcapTexture = textureLoader.load('/textures/matcaps/8.png');
+console.log('hello');
 
 /* ---------------------------------- Fonts --------------------------------- */
 
